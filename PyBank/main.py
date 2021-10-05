@@ -21,7 +21,7 @@ with open(path) as file:
         net = net + int(row[1])
         
         #sum of change between each row for average change calculation
-        sum_change = last_row_change + int(row[1])
+        sum_change = (int(row[1])) - (last_row_change)
         last_row_change = int(row[1])
 
         #check for bigger increase & store month
