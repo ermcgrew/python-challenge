@@ -29,10 +29,7 @@ with open(path) as file:
         net = net + current_pl
         
         #change between current row and previous row***********************
-        current_change = (current_pl) - (last_row_pl)
-        #if current_pl > 0:
-         #   if last_row > 0:
-          #      current_change = 
+        current_change = current_pl - last_row_pl
 
         #sum of change between each row for average change calculation
         sum_change = sum_change + current_change
@@ -50,8 +47,8 @@ with open(path) as file:
             big_dec = current_change
             big_dec_month = row[0]
 
-#average change = change between each row divided by number of rows
-avg_change = round(sum_change/int(total_months), 2)
+#average change = change between each row divided by number of rows*****
+avg_change = round((sum_change/int(total_months)), 2)
 
 #print results to terminal
 print("Financial Analysis")
@@ -61,6 +58,7 @@ print(f"Total: ${net}")
 print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {big_inc_month} (${big_inc})") 
 print(f"Greatest Decrease in Profits: {big_dec_month} (${big_dec})") 
+#print(f"sum change: {sum_change}")
 
 #print results to text file***************this is an ugly way, save what prints to terminal in a list?
 outpath = os.path.join("analysis", "PyBank_output.txt")
