@@ -37,6 +37,7 @@ with open(path) as file:
 #average change = change between each row divided by number of rows
 avg_change = round(sum_change/int(total_months), 2)
 
+#print results to terminal
 print("Financial Analysis")
 print("----------------------------")
 print(f"Total Months: {total_months}")
@@ -44,3 +45,5 @@ print(f"Total: ${net}")
 print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {big_inc_month} (${big_inc})") 
 print(f"Greatest Decrease in Profits: {big_dec_month} (${big_dec})") 
+
+#print results to text file
