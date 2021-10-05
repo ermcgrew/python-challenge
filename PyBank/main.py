@@ -10,33 +10,35 @@ path = os.path.join("Resources","budget_data.csv")
 #variables for calculations
 total_months = 0
 net = 0
-last_row = 0
+last_row_pl = 0
 sum_change = 0
 big_inc = 0
 big_dec = 0
 
 with open(path) as file:
     content = csv.reader(file, delimiter=',')
-    next(content, None) #skip headers
+    next(content, None) #skip headers ***********rubric says "store", is this ok?
     for row in content:
         #total number of months (count how many rows)
         total_months = total_months + 1
         
         #store profit/loss as integer variable 
-        pl = (int(row[1]))
+        current_pl = (int(row[1]))
 
         #net profit/loss 
-        net = net + int(row[1])
+        net = net + current_pl
         
         #change between current row and previous row***********************
-        current_change = (int(row[1])) - (last_row)
-        #if
+        current_change = (current_pl) - (last_row_pl)
+        #if current_pl > 0:
+         #   if last_row > 0:
+          #      current_change = 
 
         #sum of change between each row for average change calculation
         sum_change = sum_change + current_change
 
         #save current profit/loss for next loop
-        last_row = int(row[1])
+        last_row_pl = current_pl
 
         #check for bigger increase & store month
         if current_change >= big_inc:
@@ -60,4 +62,8 @@ print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {big_inc_month} (${big_inc})") 
 print(f"Greatest Decrease in Profits: {big_dec_month} (${big_dec})") 
 
-#print results to text file***************
+#print results to text file***************this is an ugly way, save what prints to terminal in a list?
+outpath = os.path.join("analysis", "PyBank_output.txt")
+
+with open(outpath, "w") as file:
+    file.write(f"Financial Analysis\n----------------------------\nTotal Months: {total_months}\nTotal: ${net}\nAverage Change: ${avg_change}\nGreatest Increase in Profits: {big_inc_month} (${big_inc})\nGreatest Decrease in Profits: {big_dec_month} (${big_dec})")    
