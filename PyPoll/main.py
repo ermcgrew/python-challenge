@@ -12,9 +12,14 @@ with open(path) as location:
     content = csv.reader(location, delimiter=",")
     next(content, None) #skip headers
     for row in content:
+        #The total number of votes cast
         total_votes = total_votes + 1
+        #A complete list of candidates who received votes
+        # The percentage of votes each candidate won
+        #The total number of votes each candidate won
+        #The winner of the election based on popular vote.
 
-
+#print the analysis to the terminal
 print("Election Results")
 print("-------------------------")
 print(f"Total Votes: {total_votes}")
@@ -26,21 +31,5 @@ print("-------------------------")
 print("-------------------------")
 print(f"Winner: ") #create variable
 print("-------------------------")
-    
-
-
-
-
-
-
-
-#The total number of votes cast
-#A complete list of candidates who received votes
-# The percentage of votes each candidate won
-#The total number of votes each candidate won
-#The winner of the election based on popular vote.
-
-
-#print the analysis to the terminal
 
 #export a text file with the results
