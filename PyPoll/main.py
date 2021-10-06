@@ -8,12 +8,12 @@ import os
 path=os.path.join("Resources", "election_data.csv")
 
 #variables
-total_votes= 1 #set to one since first row read outside for loop
-can1 = ""
-can2 = ""
-can3 = ""
-can4 = ""
-can1votes = 1 #set to one since first row read outside for loop
+total_votes= 0 #set to one since first row read outside for loop
+can1 = "Khan"
+can2 = "Correy"
+can3 = "Li"
+can4 = "O'Tooley"
+can1votes = 0 #set to one since first row read outside for loop
 can2votes = 0
 can3votes = 0
 can4votes = 0
@@ -23,26 +23,34 @@ with open(path) as location:
     content = csv.reader(location, delimiter=",")
     next(content, None) #skip headers
     #store first row as list
-    first_row=next(content)
+    #first_row=next(content)
     #extract first candidate name from first row
-    can1=first_row[2]
-    print (can1)
+    #can1=first_row[2]
+    #print (can1)
     for row in content:
         
         #The total number of votes cast
         total_votes = total_votes + 1
         
         #A complete list of candidates who received votes
-        if row[2] == can1:
-             #  can2=row[2]
-             can1votes = can1votes + 1 
-            
-        #elif row[2] = 
-             #   row[2] 
+        #if row[2] == can1 and row[2] != can2 and row[2] != can3 and row[2] != can4:
+         #   can1votes = can1votes + 1 
+        ##   row[2] = can2 
         
-        #The percentage of votes each candidate won
+       
+        currentcan=row[2]
         #The total number of votes each candidate won
-
+        if currentcan == can1:
+            can1votes = can1votes + 1
+        elif currentcan == can2:
+            can2votes = can2votes + 1
+        elif currentcan == can3:
+            can3votes = can3votes + 1
+        else:
+            can4votes = can4votes + 1
+        
+        
+ #The percentage of votes each candidate won
 
 #The winner of the election based on popular vote.
 
@@ -54,6 +62,9 @@ print("-------------------------")
 print(f"Total Votes: {total_votes}")
 print("-------------------------")
 print(f"{can1}: ({can1votes})")
+print(f"{can2}: ({can2votes})")
+print(f"{can3}: ({can3votes})")
+print(f"{can4}: ({can4votes})")
 #Khan: 63.000% (2218231)
 #Correy: 20.000% (704200)
 #Li: 14.000% (492940)
