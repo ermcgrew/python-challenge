@@ -80,8 +80,8 @@ print(f"Winner: {winner}")
 print("-------------------------")
 
 #export a text file with the results
-
 outpath = os.path.join("analysis", "PyPoll_output.txt")
 
 with open(outpath, "w") as file:
     file.write ("insert results here")
+    #*****************put in strings for results
