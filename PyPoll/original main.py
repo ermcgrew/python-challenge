@@ -17,12 +17,11 @@ can1votes = 0
 can2votes = 0
 can3votes = 0
 can4votes = 0
-candidate_list= []
 
 #read csv file and store/calculate required information
 with open(path) as location:
     content = csv.reader(location, delimiter=",")
-    next(content, None) #skip headers
+    csv_header=next(content)
     for row in content:
         
         #The total number of votes cast
@@ -72,4 +71,4 @@ print("-------------------------")
 outpath = os.path.join("analysis", "PyPoll_output.txt")
 
 with open(outpath, "w") as file:
-    file.write ("insert results here")
+    file.write (f"Election Results\n-------------------------\nTotal Votes: {total_votes}\n-------------------------\n{can1}: {can1percent}% ({can1votes})\n{can2}: {can2percent}% ({can2votes})\n{can3}: {can3percent}% ({can3votes})\n{can4}: {can4percent}% ({can4votes})\n-------------------------\nWinner: {winner}\n-------------------------")
