@@ -17,7 +17,7 @@ big_dec = 0
 
 with open(path) as file:
     content = csv.reader(file, delimiter=',')
-    next(content, None) #skip headers ***********rubric says "store", is this ok?
+    csv_header = next(content)
     for row in content:
         #total number of months (count how many rows)
         total_months = total_months + 1
@@ -61,7 +61,7 @@ print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {big_inc_month} (${big_inc})") 
 print(f"Greatest Decrease in Profits: {big_dec_month} (${big_dec})") 
 
-#print results to text file***************this is an ugly way, save what prints to terminal in a list?
+#print results to text file
 outpath = os.path.join("analysis", "PyBank_output.txt")
 
 with open(outpath, "w") as file:

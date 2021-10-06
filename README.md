@@ -37,7 +37,6 @@ The dataset is composed of two columns: `Date` and `Profit/Losses`. (Thankfully,
 
 * As an example, your analysis should look similar to the one below:
 
-  ```text
   Election Results
   -------------------------
   Total Votes: 3521001
@@ -49,7 +48,6 @@ The dataset is composed of two columns: `Date` and `Profit/Losses`. (Thankfully,
   -------------------------
   Winner: Khan
   -------------------------
-  ```
 
 * In addition, your final script should both print the analysis to the terminal and export a text file with the results.
 
