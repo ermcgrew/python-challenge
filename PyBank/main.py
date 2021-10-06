@@ -11,7 +11,7 @@ path = os.path.join("Resources","budget_data.csv")
 total_months = 0
 net = 0
 last_row_pl = 0
-sum_change = 0
+sum_change = []
 big_inc = 0
 big_dec = 0
 
@@ -28,11 +28,11 @@ with open(path) as file:
         #net profit/loss 
         net = net + current_pl
         
-        #change between current row and previous row***********************
+        #change between current row and previous row
         current_change = current_pl - last_row_pl
 
         #sum of change between each row for average change calculation
-        sum_change = sum_change + current_change
+        sum_change.append(current_change)    
 
         #save current profit/loss for next loop
         last_row_pl = current_pl
@@ -47,8 +47,10 @@ with open(path) as file:
             big_dec = current_change
             big_dec_month = row[0]
 
-#average change = change between each row divided by number of rows*****
-avg_change = round((sum_change/int(total_months)), 2)
+#exclude the first change from 0 to first month p/l
+sum_change.pop(0)
+#average change
+avg_change = round(((sum(sum_change))/(len(sum_change))), 2)
 
 #print results to terminal
 print("Financial Analysis")
@@ -58,7 +60,6 @@ print(f"Total: ${net}")
 print(f"Average Change: ${avg_change}")
 print(f"Greatest Increase in Profits: {big_inc_month} (${big_inc})") 
 print(f"Greatest Decrease in Profits: {big_dec_month} (${big_dec})") 
-#print(f"sum change: {sum_change}")
 
 #print results to text file***************this is an ugly way, save what prints to terminal in a list?
 outpath = os.path.join("analysis", "PyBank_output.txt")
