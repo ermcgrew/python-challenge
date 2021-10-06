@@ -8,15 +8,6 @@ import os
 path=os.path.join("Resources", "election_data.csv")
 
 #variables
-total_votes= 0 
-can1 = "Khan"
-can2 = "Correy"
-can3 = "Li"
-can4 = "O'Tooley"
-can1votes = 0 
-can2votes = 0
-can3votes = 0
-can4votes = 0
 candidate_list= []
 testdict = {}
 
@@ -27,37 +18,19 @@ with open(path) as location:
     for row in content:
         
         #The total number of votes cast
-        total_votes = total_votes + 1
+        #total_votes = total_votes + 1
         
+        candidate_name = row[2]
         #A complete list of candidates who received votes      
         #if row[2] candidate name is *not in* candidate_list, add to list
-        #if row[2] not in candidate_list:
-         #   candidate_list.append(row[2])
-        
-        
+        if candidate_name not in candidate_list:
+           candidate_list.append(candidate_name)
+           testdict[candidate_name] = 0
 
-        #if row[2] not in testdict:
-           # testdict["cand1"] = row[2]
+        # add + 1 vote to testdict candidate
+        testdict[candidate_name] = testdict[candidate_name] + 1 ##syntax?        
 
-        for name in candidate_list:
-            testdict[name] = eval(name)
-
-        
-        currentcan=row[2]
-        #The total number of votes each candidate won
-        if currentcan == can1:
-            can1votes = can1votes + 1
-        elif currentcan == can2:
-            can2votes = can2votes + 1
-        elif currentcan == can3:
-            can3votes = can3votes + 1
-        else:
-            can4votes = can4votes + 1
-
-
-#print (candidate_list)
-print(testdict)
-#The percentage of votes each candidate won
+#The percentage of votes each candidate won ***************
 
 
 #The winner of the election based on popular vote. ************************
