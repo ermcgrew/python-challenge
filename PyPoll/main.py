@@ -32,7 +32,7 @@ with open(path) as location:
         #The total number of votes cast
         total_votes = total_votes + 1
         
-        #A complete list of candidates who received votes
+        #A complete list of candidates who received votes *************is it ok to hardcode this?
         #if row[2] == can1 and row[2] != can2 and row[2] != can3 and row[2] != can4:
          #   can1votes = can1votes + 1 
         ##   row[2] = can2 
@@ -48,9 +48,12 @@ with open(path) as location:
             can3votes = can3votes + 1
         else:
             can4votes = can4votes + 1
-        
-        
- #The percentage of votes each candidate won
+              
+#The percentage of votes each candidate won
+can1percent = round((can1votes/total_votes) * 100, 3)
+can2percent = round((can2votes/total_votes) * 100, 3)
+can3percent = round((can3votes/total_votes) * 100, 3)
+can4percent = round((can4votes/total_votes) * 100, 3)
 
 #The winner of the election based on popular vote.
 
@@ -61,10 +64,10 @@ print("Election Results")
 print("-------------------------")
 print(f"Total Votes: {total_votes}")
 print("-------------------------")
-print(f"{can1}: ({can1votes})")
-print(f"{can2}: ({can2votes})")
-print(f"{can3}: ({can3votes})")
-print(f"{can4}: ({can4votes})")
+print(f"{can1}: {can1percent}% ({can1votes})")
+print(f"{can2}: {can2percent}% ({can2votes})")
+print(f"{can3}: {can3percent}% ({can3votes})")
+print(f"{can4}: {can4percent}% ({can4votes})")
 #Khan: 63.000% (2218231)
 #Correy: 20.000% (704200)
 #Li: 14.000% (492940)
