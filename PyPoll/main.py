@@ -9,6 +9,7 @@ path=os.path.join("Resources", "election_data.csv")
 
 #variables
 total_votes= 0 #set to one since first row read outside for loop
+#*************is it ok to hardcode this?
 can1 = "Khan"
 can2 = "Correy"
 can3 = "Li"
@@ -32,7 +33,7 @@ with open(path) as location:
         #The total number of votes cast
         total_votes = total_votes + 1
         
-        #A complete list of candidates who received votes *************is it ok to hardcode this?
+        #A complete list of candidates who received votes 
         #if row[2] == can1 and row[2] != can2 and row[2] != can3 and row[2] != can4:
          #   can1votes = can1votes + 1 
         ##   row[2] = can2 
@@ -48,16 +49,22 @@ with open(path) as location:
             can3votes = can3votes + 1
         else:
             can4votes = can4votes + 1
-              
+
 #The percentage of votes each candidate won
 can1percent = round((can1votes/total_votes) * 100, 3)
 can2percent = round((can2votes/total_votes) * 100, 3)
 can3percent = round((can3votes/total_votes) * 100, 3)
 can4percent = round((can4votes/total_votes) * 100, 3)
 
-#The winner of the election based on popular vote.
-
-
+#The winner of the election based on popular vote. ************************
+if can1votes >= can2votes and can1votes >= can3votes and can1votes >= can4votes:
+    winner = can1
+elif can2votes >= can1votes and can2votes >= can3votes and can2votes >= can4votes:
+    winner = can2
+elif can3votes >= can1votes and can3votes >= can2votes and can3votes >= can4votes:
+    winner = can3
+else:
+    winner = can4
 
 #print the analysis to the terminal
 print("Election Results")
@@ -68,12 +75,8 @@ print(f"{can1}: {can1percent}% ({can1votes})")
 print(f"{can2}: {can2percent}% ({can2votes})")
 print(f"{can3}: {can3percent}% ({can3votes})")
 print(f"{can4}: {can4percent}% ({can4votes})")
-#Khan: 63.000% (2218231)
-#Correy: 20.000% (704200)
-#Li: 14.000% (492940)
-#O'Tooley: 3.000% (105630)
 print("-------------------------")
-print(f"Winner: ") #create variable
+print(f"Winner: {winner}")
 print("-------------------------")
 
 #export a text file with the results
