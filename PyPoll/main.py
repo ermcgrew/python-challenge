@@ -10,6 +10,7 @@ path=os.path.join("Resources", "election_data.csv")
 #variables
 candidate_list= []
 votedict = {}
+most_votes = 0
 
 #read csv file and store/calculate required information
 with open(path) as location:
@@ -17,42 +18,38 @@ with open(path) as location:
     csv_header = next(content) #store csv headers
     for row in content:
         candidate_name = row[2]
-        #A complete list of candidates who received votes      
-        if candidate_name not in votedict:#candidate_list:
-           #candidate_list.append(candidate_name)
+        # check for candidate_name in votedict, if not already present, add as key and +1 vote value     
+        if candidate_name not in votedict:
            votedict[candidate_name] = 1
+        # if candidate_name already listed in votedict, add +1 vote to value
         else:
-        # add + 1 vote to candidate_name value
             votedict[candidate_name] = votedict[candidate_name] + 1         
 
-#total votes using .values on votedict
-values = votedict.values()
-total=sum(values)
+#total votes by summing all values in votedict
+total=sum(votedict.values())
 
-#calculate percentage of votes each candidate won & add to votedict
-for key, value in votedict.items():
-    votedict[key] = [value, round(((value/total) *100), 3)]
-
-#The winner of the election based on popular vote. ************************
-
-
-
-
-#check dictionary:
-print(votedict)
-
+#calculate percentage of votes each candidate won & add to votedict as another value for each key
+for name, votes in votedict.items():
+    votedict[name] = [votes, round(((votes/total) *100), 3)]
+    #find winner using largest vote value
+    if votes >= most_votes: 
+        most_votes = votes
+        winner = name
 
 #print the analysis to the terminal
 print("Election Results")
 print("-------------------------")
 print(f"Total Votes: {total}")
 print("-------------------------")
-#print(f"{can1}: {can1percent}% ({can1votes})")
-#print(f"{can2}: {can2percent}% ({can2votes})")
-#print(f"{can3}: {can3percent}% ({can3votes})")
-#print(f"{can4}: {can4percent}% ({can4votes})")
+
+for name, values in votedict.items():
+    #print(f"{name}: {percent}% ({votes})")
+    print(f"{name}: {values}")
+
+
+
 print("-------------------------")
-#print(f"Winner: {winner}")
+print(f"Winner: {winner}")
 print("-------------------------")
 
 #export a text file with the results
