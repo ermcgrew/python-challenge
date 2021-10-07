@@ -9,37 +9,43 @@ path=os.path.join("Resources", "election_data.csv")
 
 #variables
 candidate_list= []
-testdict = {}
+votedict = {}
 
 #read csv file and store/calculate required information
 with open(path) as location:
     content = csv.reader(location, delimiter=",")
     csv_header = next(content) #store csv headers
     for row in content:
-        
-        #The total number of votes cast
-        #total_votes = total_votes + 1
-        
         candidate_name = row[2]
         #A complete list of candidates who received votes      
-        #if row[2] candidate name is *not in* candidate_list, add to list
-        if candidate_name not in candidate_list:
-           candidate_list.append(candidate_name)
-           testdict[candidate_name] = 0
+        if candidate_name not in votedict:#candidate_list:
+           #candidate_list.append(candidate_name)
+           votedict[candidate_name] = 1
+        else:
+        # add + 1 vote to candidate_name value
+            votedict[candidate_name] = votedict[candidate_name] + 1         
 
-        # add + 1 vote to testdict candidate
-        testdict[candidate_name] = testdict[candidate_name] + 1 ##syntax?        
+#total votes using .values on votedict
+values = votedict.values()
+total=sum(values)
 
-#The percentage of votes each candidate won ***************
-
+#calculate percentage of votes each candidate won & add to votedict
+for key, value in votedict.items():
+    votedict[key] = [value, round(((value/total) *100), 3)]
 
 #The winner of the election based on popular vote. ************************
+
+
+
+
+#check dictionary:
+print(votedict)
 
 
 #print the analysis to the terminal
 print("Election Results")
 print("-------------------------")
-print(f"Total Votes: {total_votes}")
+print(f"Total Votes: {total}")
 print("-------------------------")
 #print(f"{can1}: {can1percent}% ({can1votes})")
 #print(f"{can2}: {can2percent}% ({can2votes})")
