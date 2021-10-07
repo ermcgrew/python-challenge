@@ -7,10 +7,9 @@ import csv
 #connect to budget_data.csv file
 path = os.path.join("Resources","budget_data.csv")
 
-#variables for calculations
+#variables for storage & calculations
 last_row_pl = 0
 pl_dict = {}
-total_months = 0
 net = 0
 sum_change = []
 big_inc = 0
@@ -21,15 +20,11 @@ with open(path) as file:
     csv_header = next(content)
     for row in content:
 
-        #store profit/loss & month as variables
+        #store profit/loss as integer variable
         current_pl = (int(row[1]))
-        current_month = row[0]
-
-        #calculate change between current row and previous row
-        current_change = current_pl - last_row_pl
-
-        #add month, p/l, change to dictionary
-        pl_dict[current_month] = current_pl, current_change
+        
+        #add month, p/l, change between current p/l and previous p/l to dictionary
+        pl_dict[row[0]] = current_pl, (current_pl - last_row_pl)
         
         #save current profit/loss for next loop
         last_row_pl = current_pl
