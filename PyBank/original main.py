@@ -8,10 +8,9 @@ import csv
 path = os.path.join("Resources","budget_data.csv")
 
 #variables for calculations
-last_row_pl = 0
-pl_dict = {}
 total_months = 0
 net = 0
+last_row_pl = 0
 sum_change = []
 big_inc = 0
 big_dec = 0
@@ -20,33 +19,33 @@ with open(path) as file:
     content = csv.reader(file, delimiter=',')
     csv_header = next(content)
     for row in content:
-
-        #store profit/loss & month as variables
+        #total number of months (count how many rows)
+        total_months = total_months + 1
+        
+        #store profit/loss as integer variable 
         current_pl = (int(row[1]))
-        current_month = row[0]
 
-        #calculate change between current row and previous row
+        #net profit/loss 
+        net = net + current_pl
+        
+        #change between current row and previous row
         current_change = current_pl - last_row_pl
 
-        #add month, p/l, change to dictionary
-        pl_dict[current_month] = current_pl, current_change
-        
+        #sum of change between each row for average change calculation
+        sum_change.append(current_change)    
+
         #save current profit/loss for next loop
         last_row_pl = current_pl
- 
-#total months of data 
-total_months = len(pl_dict)
 
-#loop through dictionary values
-for month, values in pl_dict.items():
-    net = net + values[0] #calculate total p/l
-    sum_change.append(values[1]) #create list of changes for average calculation
-    if values[1] >= big_inc: #find month with biggest positive change
-        big_inc = values[1]
-        big_inc_month = month
-    if values[1] <= big_dec: #find month with biggest negative change
-        big_dec = values[1]
-        big_dec_month = month
+        #check for bigger increase & store month
+        if current_change >= big_inc:
+            big_inc = current_change
+            big_inc_month = row[0]
+        
+        #check for bigger decrease & store month
+        if current_change <= big_dec:
+            big_dec = current_change
+            big_dec_month = row[0]
 
 #exclude the first change from 0 to first month p/l
 sum_change.pop(0)
@@ -66,7 +65,4 @@ print(f"Greatest Decrease in Profits: {big_dec_month} (${big_dec})")
 outpath = os.path.join("analysis", "PyBank_output.txt")
 
 with open(outpath, "w") as file:
-    file.write(f"Financial Analysis\n----------------------------")
-    file.write(f"\nTotal Months: {total_months}\nTotal: ${net}\nAverage Change: ${avg_change}")
-    file.write(f"\nGreatest Increase in Profits: {big_inc_month} (${big_inc})")
-    file.write(f"\nGreatest Decrease in Profits: {big_dec_month} (${big_dec})")    
+    file.write(f"Financial Analysis\n----------------------------\nTotal Months: {total_months}\nTotal: ${net}\nAverage Change: ${avg_change}\nGreatest Increase in Profits: {big_inc_month} (${big_inc})\nGreatest Decrease in Profits: {big_dec_month} (${big_dec})")    
